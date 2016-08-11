@@ -22,6 +22,7 @@
 @property (nonatomic,strong)NSArray *items;
 @property (nonatomic,copy) DoneBlock doneBlock;
 @property (nonatomic,copy) CancelBlock cancelBlock;
+@property (nonatomic,strong)UIDynamicAnimator *animator;
 @end
 
 
@@ -34,7 +35,7 @@
         self.items = items;
         self.doneBlock = done;
         self.cancelBlock = cancel;
-        [self setupUI];
+        [self setup];
     }
     return self;
 }
@@ -43,23 +44,51 @@
 {
     UIWindow *keyWindow = [[UIApplication sharedApplication] keyWindow];
     [keyWindow addSubview:self];
-    CGFloat pickerY = kScreenSize.height * (1 - kSheetHeightPercent);
-    CGRect pickerF = {{0,pickerY},self.sheetPicker.frame.size};
+//    CGFloat pickerY = kScreenSize.height * (1 - kSheetHeightPercent);
+//    CGRect pickerF = {{0,pickerY},self.sheetPicker.frame.size};
+    
+    
+    UIDynamicBehavior *snapBehavior = [self showAttachmentBehavior];
+    [self.animator addBehavior:snapBehavior];
     [UIView animateWithDuration:0.25 animations:^{
         self.alpha = 1.0;
-        self.sheetPicker.frame = pickerF;
     } completion:^(BOOL finished) {
-        
     }];
+}
+
+- (UIDynamicBehavior*)showAttachmentBehavior
+{
+    CGFloat centerX = self.sheetPicker.frame.size.width * 0.5;
+    CGFloat centerY = kScreenSize.height - self.sheetPicker.frame.size.height * 0.5;
+    CGPoint sheetCenter = CGPointMake(centerX, centerY);
+    UIAttachmentBehavior *attacheBehavior = [[UIAttachmentBehavior alloc] initWithItem:self.sheetPicker attachedToAnchor:sheetCenter];
+    attacheBehavior.length = 0.0f;
+    attacheBehavior.frequency = 1.0f;
+    attacheBehavior.damping = 0.85f;
+    return  attacheBehavior;
+}
+
+- (UIDynamicBehavior*)showSnapBehavior
+{
+    CGFloat centerX = self.sheetPicker.frame.size.width * 0.5;
+    CGFloat centerY = kScreenSize.height - self.sheetPicker.frame.size.height * 0.5;
+    CGPoint sheetCenter = CGPointMake(centerX, centerY);
+    UISnapBehavior *snapBehavior = [[UISnapBehavior alloc] initWithItem:self.sheetPicker snapToPoint:sheetCenter];
+    snapBehavior.damping = 0.65f;
+    return  snapBehavior;
 }
 
 - (void)disappear
 {
-    CGFloat pickerY = kScreenSize.height;
-    CGRect pickerF = {{0,pickerY},self.sheetPicker.frame.size};
+//    CGFloat pickerY = kScreenSize.height;
+//    CGRect pickerF = {{0,pickerY},self.sheetPicker.frame.size};
+    [self.animator removeAllBehaviors];
+    UIGravityBehavior *gravity = [[UIGravityBehavior alloc] initWithItems:@[self.sheetPicker]];
+    gravity.gravityDirection = CGVectorMake(0.0f, 10.0f);
+    [self.animator addBehavior:gravity];
     [UIView animateWithDuration:0.25 animations:^{
         self.alpha = 0.0;
-        self.sheetPicker.frame = pickerF;
+//        self.sheetPicker.frame = pickerF;
     } completion:^(BOOL finished) {
         [self removeFromSuperview];
     }];
@@ -91,9 +120,12 @@
     return [self.items count];
 }
 
-#pragma mark - setup ui
-- (void)setupUI
+#pragma mark - setup
+- (void)setup
 {
+    // Set up our UIKit Dynamics
+    self.animator = [[UIDynamicAnimator alloc] initWithReferenceView:self];
+    
     //coverview init
     self.alpha = 0.0;
     self.backgroundColor =  [UIColor colorWithRed:0/255.0 green:0/255.0 blue:0/255.0 alpha:0.3];
