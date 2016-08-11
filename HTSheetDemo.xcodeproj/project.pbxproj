@@ -13,6 +13,7 @@
 		BEFB6A341D5B2884007A49C6 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BEFB6A321D5B2884007A49C6 /* Main.storyboard */; };
 		BEFB6A361D5B2884007A49C6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BEFB6A351D5B2884007A49C6 /* Assets.xcassets */; };
 		BEFB6A391D5B2884007A49C6 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BEFB6A371D5B2884007A49C6 /* LaunchScreen.storyboard */; };
+		BEFB6A431D5B2911007A49C6 /* HTSheetView.m in Sources */ = {isa = PBXBuildFile; fileRef = BEFB6A421D5B2911007A49C6 /* HTSheetView.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,6 +27,8 @@
 		BEFB6A351D5B2884007A49C6 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		BEFB6A381D5B2884007A49C6 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		BEFB6A3A1D5B2884007A49C6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		BEFB6A411D5B2911007A49C6 /* HTSheetView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HTSheetView.h; sourceTree = "<group>"; };
+		BEFB6A421D5B2911007A49C6 /* HTSheetView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HTSheetView.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -58,6 +61,7 @@
 		BEFB6A281D5B2884007A49C6 /* HTSheetDemo */ = {
 			isa = PBXGroup;
 			children = (
+				BEFB6A401D5B289A007A49C6 /* action */,
 				BEFB6A2C1D5B2884007A49C6 /* AppDelegate.h */,
 				BEFB6A2D1D5B2884007A49C6 /* AppDelegate.m */,
 				BEFB6A2F1D5B2884007A49C6 /* ViewController.h */,
@@ -77,6 +81,15 @@
 				BEFB6A2A1D5B2884007A49C6 /* main.m */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		BEFB6A401D5B289A007A49C6 /* action */ = {
+			isa = PBXGroup;
+			children = (
+				BEFB6A411D5B2911007A49C6 /* HTSheetView.h */,
+				BEFB6A421D5B2911007A49C6 /* HTSheetView.m */,
+			);
+			path = action;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -149,6 +162,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BEFB6A431D5B2911007A49C6 /* HTSheetView.m in Sources */,
 				BEFB6A311D5B2884007A49C6 /* ViewController.m in Sources */,
 				BEFB6A2E1D5B2884007A49C6 /* AppDelegate.m in Sources */,
 				BEFB6A2B1D5B2884007A49C6 /* main.m in Sources */,

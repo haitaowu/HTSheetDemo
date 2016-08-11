@@ -7,6 +7,7 @@
 //
 
 #import "ViewController.h"
+#import "HTSheetView.h"
 
 @interface ViewController ()
 
@@ -16,12 +17,15 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view, typically from a nib.
 }
-
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+- (IBAction)tapShowBtn:(id)sender {
+    NSArray *items = @[@"80",@"90",@"90",@"90",@"90",@"90",@"90",@"90",@"90",@"90"];
+    HTSheetView *sheetView = [[HTSheetView alloc] initWithTitle:@"Title" items:items done:^(NSString *str) {
+        NSLog(@"selectedItems = %@",str);
+    } cancel:^(){
+        NSLog(@"cancel...");
+    }];
+    [sheetView show];
 }
 
 @end
