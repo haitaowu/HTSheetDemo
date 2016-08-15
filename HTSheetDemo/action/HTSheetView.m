@@ -78,7 +78,7 @@
     return  snapBehavior;
 }
 
-- (void)disappear
+- (void)dismissSheet
 {
 //    CGFloat pickerY = kScreenSize.height;
 //    CGRect pickerF = {{0,pickerY},self.sheetPicker.frame.size};
@@ -174,7 +174,7 @@
 #pragma mark - selectors
 - (void)tapConfirmBtn
 {
-    [self disappear];
+    [self dismissSheet];
     if (self.doneBlock != nil) {
         NSInteger selectedRow = [self.picker selectedRowInComponent:0];
         NSString *selecteItem = self.items[selectedRow];
@@ -184,7 +184,7 @@
 
 - (void)tapCancelBtn
 {
-    [self disappear];
+    [self dismissSheet];
     if (self.cancelBlock != nil) {
         self.cancelBlock();
     }
@@ -192,7 +192,7 @@
 
 - (void)tapCoverView
 {
-    [self disappear];
+    [self dismissSheet];
 }
 
 
